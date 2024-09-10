@@ -16,6 +16,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { RdvService } from '../../service/rdv.service';
 import { UserService, User } from '../../service/user.service';
 
+
 @Component({
   selector: 'app-agenda',
   standalone: true,
@@ -42,7 +43,7 @@ export class AgendaComponent {
     this.rdvService.getAll();
     this.rdvService.rdvs$.subscribe(data => {
       const event = data.map(rdv => {
-        return { title: rdv.sujet, start: rdv.date, duree: rdv.duree };
+        return { title: rdv.sujet, start: rdv.date };
       })
 
       this.calendarOptions = {
@@ -58,6 +59,7 @@ export class AgendaComponent {
         dateClick: (arg: any) => this.handleDateClick(arg),
         events: event
       };
+      console.log(this.calendarOptions)
 
     })
     // this.calendarOptions.events = this.rdvService.rdvs.value;

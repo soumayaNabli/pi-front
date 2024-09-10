@@ -15,7 +15,7 @@ export interface Rdv {
     providedIn: 'root'
 })
 export class RdvService {
-    baseUrl = `${URL_PATH}/rdvs`; 
+    baseUrl = `${URL_PATH}/rdv`; 
     private rdvs = new BehaviorSubject<Rdv[]>([]);
 
     rdvs$ = this.rdvs.asObservable();

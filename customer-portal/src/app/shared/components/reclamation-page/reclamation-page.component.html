@@ -1,6 +1,6 @@
 <div class="card">
-    <div class="add-container"><p-button label="Add reclamation" iconPos="right" icon="pi pi-plus" 
-        (click)="showAddReclamation = true" /></div>
+    <div class="add-container"><p-button label="Add reclamation" iconPos="right" icon="pi pi-plus"
+            (click)="showAddReclamation = true" /></div>
     <p-table [value]="reclamationData" selectionMode="single" [(selection)]="selectedReclamation" dataKey="id"
         (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onUnRowSelect($event)"
         [tableStyle]="{ 'min-width': '50rem' }">
@@ -32,10 +32,40 @@
 </p-dialog>
 
 <p-dialog header="Response" [modal]="true" [(visible)]="responseVisible"
-    (onHide)="responseVisible = false;responseData = {}" [style]="{ width: '30rem' }">
+    (onHide)="responseVisible = false;responseData = {description:''}" [style]="{ width: '30rem' }">
     <app-response-form [responseData]="responseData"></app-response-form>
 </p-dialog>
 
 <p-dialog header="Reclamation" [modal]="true" [(visible)]="showAddReclamation">
-    hello
+    <form #userForm="ngForm" (ngSubmit)="onSubmitAdd(userForm)" [style]="{ width: '40rem' }">
+        <div class="form-container">
+            
+            
+            <p-floatLabel>
+                <p-dropdown name="priorities" [options]="priorities" ngModel />
+                <label for="priorities">Priority</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <textarea name="description" rows="5" cols="45" pInputTextarea
+                    ngModel>
+                </textarea>
+                <label for="description">Description</label>
+            </p-floatLabel>
+            <p-toast />
+            <p-fileUpload 
+                mode="basic" 
+                chooseLabel="Choose" 
+                chooseIcon="pi pi-upload"
+                name="demo[]" 
+                url="https://www.primefaces.org/cdn/api/upload.php" 
+                accept="image/*" 
+                maxFileSize="1000000" 
+                (onUpload)="onUpload($event)" />
+
+        </div>
+        <div class="dialog-buttons">
+            <p-button label="Cancel" severity="secondary" (onClick)=" showAddReclamation = false" />
+            <p-button label="Save" type="submit" />
+        </div>
+    </form>
 </p-dialog>

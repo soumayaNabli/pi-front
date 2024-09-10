@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup ,FormsModule} from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -11,7 +11,17 @@ import { TagModule } from 'primeng/tag';
 import { BadgeModule } from 'primeng/badge';
 import { FileUploaderComponent } from '../file-uploader/file-uploader.component';
 import { ResponseFormComponent } from '../response-form/response-form.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MessageService } from 'primeng/api';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+import { ReclamationService } from '../../service/reclamation.service';
 
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 
 @Component({
   selector: 'app-reclamation-page',
@@ -27,8 +37,13 @@ import { ResponseFormComponent } from '../response-form/response-form.component'
     TagModule, 
     BadgeModule, 
     FileUploaderComponent,
-    ResponseFormComponent
+    ResponseFormComponent,
+    FormsModule,
+    DropdownModule,
+    InputTextareaModule,
+    FileUploadModule, ToastModule
   ],
+  providers: [MessageService],
   templateUrl: './reclamation-page.component.html',
   styleUrl: './reclamation-page.component.scss',
 })
@@ -40,13 +55,24 @@ export class ReclamationPageComponent implements OnInit {
   formGroup: FormGroup | undefined;
   uploadVisible = false;
   responseVisible = false;
-  responseData:any;
+  responseData = {
+    description: ''
+  };
+  priorities = [
+    'Basse',
+    'Moyenne',
+    'Urgente'
+  ]
   showAddReclamation=false;
 
-  ngOnInit() {
+  constructor(private messageService: MessageService, private reclamationService: ReclamationService) {}
 
-    }
+  ngOnInit() {}
   
+
+  onUpload(event: any) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+}
 
   onRowSelect(event: any) {
     console.log(event);
@@ -57,5 +83,12 @@ export class ReclamationPageComponent implements OnInit {
   showResponse(response:any) {
     this.responseVisible = true
     this.responseData = response
+  }
+
+  onSubmitAdd(userForm: any) {
+    console.log(userForm.value);
+    this.reclamationService.create(userForm.value).subscribe((res) => {
+      console.log(res);
+    })
   }
 }

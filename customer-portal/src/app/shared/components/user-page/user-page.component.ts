@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TableModule } from 'primeng/table';
@@ -132,7 +132,8 @@ const USERS_DATA = [
     styleUrl: './user-page.component.scss',
 })
 export class UserPageComponent implements OnInit {
-    users = USERS_DATA;
+    @Input() users:any;
+
     selectedUser: any;
     showDetails = false;
     formGroup: FormGroup | undefined;

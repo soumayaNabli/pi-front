@@ -7,17 +7,19 @@ import { TabViewModule } from 'primeng/tabview';
 import { HeaderComponent } from '../shared/components/header/header.component';
 import { UserPageComponent } from '../shared/components/user-page/user-page.component';
 import { ReclamationPageComponent } from '../shared/components/reclamation-page/reclamation-page.component';
+import { UserService } from '../shared/service/user.service';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  providers: [HttpClient],
+  providers: [HttpClient, UserService],
   imports: [CommonModule, HeaderComponent, TabViewModule, UserPageComponent, ReclamationPageComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
   _activeTabIndex = 0;
+  userData: any;
 
   set activeTabIndex(value: number) {
     this.router.navigate([`/admin/${value === 1 ? 'reclamation' : 'expert'}`]);
@@ -28,7 +30,7 @@ export class AdminComponent implements OnInit {
     return this._activeTabIndex;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(url => {
@@ -38,8 +40,16 @@ export class AdminComponent implements OnInit {
           this.activeTabIndex = 1; // Set to the index of the Reclamations tab
         } else {
           this.activeTabIndex = 0; // Default to the first tab
+          this.initDataForUserPage()
         }
       }
+    });
+  }
+
+  initDataForUserPage() {
+    this.userService.getAll();
+    this.userService.users$.subscribe(data => {
+      this.userData = data;
     });
   }
 }

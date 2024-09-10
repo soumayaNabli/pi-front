@@ -1,4 +1,6 @@
 <div class="card">
+    <div class="add-container"><p-button label="Add User" iconPos="right" icon="pi pi-plus"
+            (click)="showAddUser = true" /></div>
     <p-table [value]="users" selectionMode="single" [(selection)]="selectedUser" dataKey="id"
         (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onUnRowSelect($event)"
         [tableStyle]="{ 'min-width': '50rem' }">
@@ -26,19 +28,19 @@
     [style]="{ width: '40rem' }">
     <div class="form-container">
         <p-floatLabel>
-            <input type="text" pInputText formControlName="username" />
+            <input type="text" pInputText name="username" ngModel />
             <label for="username">Username</label>
         </p-floatLabel>
         <p-floatLabel>
-            <input type="text" pInputText formControlName="email" />
+            <input type="text" pInputText name="email" ngModel />
             <label for="email">Email</label>
         </p-floatLabel>
         <p-floatLabel>
-            <input type="text" pInputText formControlName="profession" />
+            <input type="text" pInputText name="profession" ngModel />
             <label for="profession">Profession</label>
         </p-floatLabel>
         <p-floatLabel>
-            <input type="text" pInputText formControlName="role" />
+            <input type="text" pInputText name="role" ngModel />
             <label for="role">Role</label>
         </p-floatLabel>
     </div>
@@ -48,15 +50,17 @@
             <p-fieldset [toggleable]="true" [collapsed]="true">
                 <ng-template pTemplate="header">
                     <div class="flex align-items-center gap-2 px-2">
-                        
+
                         <span class="font-bold pr-2">{{reclamation.date}}</span>
-                        <p-tag [severity]="reclamation.priorite === 'urgente' ? 'danger' : reclamation.priorite === 'moyenne' ? 'warning' : undefined" [value]="reclamation.priorite"/>
+                        <p-tag
+                            [severity]="reclamation.priorite === 'urgente' ? 'danger' : reclamation.priorite === 'moyenne' ? 'warning' : undefined"
+                            [value]="reclamation.priorite" />
                     </div>
                 </ng-template>
                 <p>
                     {{reclamation.description}}
                 </p>
-                <p-tag severity="success" value="Success"/>
+                <p-tag severity="success" value="Success" />
             </p-fieldset>
         </div>
         <div *ngIf="!selectedUser?.reclamations.length">
@@ -67,4 +71,31 @@
         <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
         <p-button label="Save" (onClick)="showDetails = false" />
     </div>
+</p-dialog>
+
+<p-dialog header="Add new User" [modal]="true" [(visible)]="showAddUser" [style]="{ width: '40rem' }">
+    <form #userForm="ngForm" (ngSubmit)="onSubmitAdd(userForm)">
+    <div class="form-container">
+            <p-floatLabel>
+                <input type="text" pInputText name="username" ngModel />
+                <label for="username">Username</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText name="email" ngModel />
+                <label for="email">Email</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText name="profession" ngModel />
+                <label for="profession">Profession</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" pInputText name="role" ngModel />
+                <label for="role">Role</label>
+            </p-floatLabel>
+            <div class="dialog-buttons">
+                <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
+                <p-button label="Save" type="submit" />
+            </div>
+        </div>
+    </form>
 </p-dialog>

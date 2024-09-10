@@ -13,7 +13,7 @@ import { ReclamationService } from '../shared/service/reclamation.service';
 @Component({
   selector: 'app-admin',
   standalone: true,
-  providers: [HttpClient, UserService],
+  providers: [HttpClient, UserService, ReclamationService],
   imports: [CommonModule, HeaderComponent, TabViewModule, UserPageComponent, ReclamationPageComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',

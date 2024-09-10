@@ -35,3 +35,10 @@ p-dialog .form-container {
     display: flex;
     justify-content: space-between;
 }
+
+.add-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}

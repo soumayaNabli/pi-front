@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -127,7 +127,8 @@ const USERS_DATA = [
 @Component({
     selector: 'app-user-page',
     standalone: true,
-    imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, FloatLabelModule, FieldsetModule, TagModule],
+    providers: [],
+    imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, FloatLabelModule, FieldsetModule, TagModule,FormsModule],
     templateUrl: './user-page.component.html',
     styleUrl: './user-page.component.scss',
 })
@@ -136,6 +137,7 @@ export class UserPageComponent implements OnInit {
 
     selectedUser: any;
     showDetails = false;
+    showAddUser = false;
     formGroup: FormGroup | undefined;
 
     ngOnInit() {
@@ -161,4 +163,8 @@ export class UserPageComponent implements OnInit {
     onUnRowSelect(event: any) {
         console.log(event);
     }
+
+    onSubmitAdd(form: any) {
+        console.log('Form Data: ', form.value);
+      }
 }

@@ -38,7 +38,7 @@ export class AgendaComponent {
   ngOnInit() {
     this.userService.getAll();
     this.userService.users$.subscribe(data => {
-      this.experts = data.filter(user => user.role === 'expert');
+      this.experts = data.filter(user => user.role === 'expert').map((e:any)=>e.username);
     });
     this.rdvService.getAll();
     this.rdvService.rdvs$.subscribe(data => {
@@ -78,5 +78,12 @@ export class AgendaComponent {
 
   onSubmitAdd(form: any) {
     console.log(form.value);
+    const data= {
+      date:this.date,
+      ...form.value
+    }
+    this.rdvService.create(data).subscribe((res) => {
+      console.log(res);
+    })
   }
 }

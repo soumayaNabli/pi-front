@@ -55,6 +55,12 @@ export class UserPageComponent implements OnInit {
 
     onSubmitAdd(form: any) {
         console.log('Form Data: ', form.value);
-        this.userService.create(form.value)
+        this.userService.create(form.value).subscribe(
+            response => {
+                console.log('User created successfully:', response);
+            },
+            error => {
+                console.error('Error creating user:', error);
+            })
       }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
 import { Reclamation } from './reclamation.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 
 export interface User {
     id: number;
@@ -35,7 +35,15 @@ export class UserService {
     }
 
     create(user: User): Observable<any> {
-        return this.http.post(`${this.baseUrl}`, user);
+        console.log('Creating user:', user);
+    console.log('API URL:', this.baseUrl);
+    
+    return this.http.post(`${this.baseUrl}`, user).pipe(
+        catchError((error: any) => {
+            console.error('Error creating user:', error);
+            return throwError(error);
+        })
+    );
     }
 
     update(id: number, user: User) {

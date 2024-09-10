@@ -1,1 +1,29 @@
-<full-calendar [options]="calendarOptions"></full-calendar>
+<full-calendar #calendar [options]="calendarOptions"></full-calendar>
+<p-dialog header="Add Appointment" [modal]="true" [(visible)]="addVisible">
+    <form #addForm="ngForm" (ngSubmit)="onSubmitAdd(addForm)" [style]="{ width: '45rem' }">
+        <div class="form-container">
+            <p-floatLabel>
+                <p-calendar [disabled]="true"  name="date" [(ngModel)]="date" [showTime]="true"  />
+                <label for="date">Date</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input type="text" name="sujet" pInputText ngModel />
+                <label for="sujet">Subject</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <p-inputNumber 
+                inputId="integeronly"  name="duree" pInputNumber ngModel />
+                <label for="duree">Duration</label>
+            </p-floatLabel>
+            
+            <p-floatLabel>
+                <p-dropdown name="expert" [options]="experts" ngModel />
+                <label for="expert">Expert</label>
+            </p-floatLabel>
+        </div>
+        <div class="dialog-buttons">
+            <p-button label="Cancel" severity="secondary" (onClick)=" addVisible = false" />
+            <p-button label="Save" type="submit" />
+        </div>
+    </form>
+</p-dialog>

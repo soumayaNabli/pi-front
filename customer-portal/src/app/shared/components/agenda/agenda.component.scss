@@ -1,0 +1,33 @@
+
+.add-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+p-floatLabel {
+    width: 47%;
+}
+
+p-dialog .form-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.7rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+}
+form {display: flex;
+    flex-direction: column;
+    justify-content: space-between;}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+:host::ng-deep .p-dropdown.p-component,:host::ng-deep .p-inputtext.p-component  {
+    width: 100%;
+}

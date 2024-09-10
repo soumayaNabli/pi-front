@@ -10,6 +10,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
         'Access-Control-Allow-Origin': '*'
       }
     });
+    console.log("interceptor")
     return next.handle(clonedRequest);
   }
 }

@@ -18,7 +18,7 @@ export interface User {
     providedIn: 'root'
 })
 export class UserService {
-    baseUrl = `${URL_PATH}/users`;
+    baseUrl = `${URL_PATH}/user`;
     private usersSubject = new BehaviorSubject<User[]>([]);
     users$ = this.usersSubject.asObservable();
 
@@ -35,7 +35,8 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post(this.baseUrl, user);
+        console.log('this create user',user)
+        return this.http.post(`${this.baseUrl}/signup`, user);
     }
 
     update(id: number, user: User) {

@@ -19,7 +19,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.profession }}</td>
                 <td>{{ user.role }}</td>
-                <td>{{ user.reclamations.length }}</td>
+                <td>{{ user.reclamations?.length ? user.reclamations?.length : 0 }}</td>
             </tr>
         </ng-template>
     </p-table>
@@ -85,6 +85,10 @@
                 <label for="email">Email</label>
             </p-floatLabel>
             <p-floatLabel>
+                <input type="text" pInputText name="password" ngModel />
+                <label for="password">Password</label>
+            </p-floatLabel>
+            <p-floatLabel>
                 <input type="text" pInputText name="profession" ngModel />
                 <label for="profession">Profession</label>
             </p-floatLabel>
@@ -92,10 +96,11 @@
                 <input type="text" pInputText name="role" ngModel />
                 <label for="role">Role</label>
             </p-floatLabel>
-            <div class="dialog-buttons">
-                <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
-                <p-button label="Save" type="submit" />
-            </div>
+
+        </div>
+        <div class="dialog-buttons">
+            <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
+            <p-button label="Save" type="submit" />
         </div>
     </form>
 </p-dialog>

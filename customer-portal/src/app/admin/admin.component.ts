@@ -44,6 +44,8 @@ export class AdminComponent implements OnInit {
           this.activeTabIndex = 0; // Default to the first tab
           this.initDataForUserPage()
         }
+      } else {
+        this.initDataForUserPage()
       }
     });
   }

@@ -25,7 +25,7 @@ export interface Reclamation {
     providedIn: 'root'
 })
 export class ReclamationService {
-    baseUrl = `${URL_PATH}/reclamations`;
+    baseUrl = `${URL_PATH}/reclamation`;
     private reclamationSubject = new BehaviorSubject<Reclamation[]>([]);
     reclamations$ = this.reclamationSubject.asObservable();
 

@@ -1,0 +1,37 @@
+p-floatLabel {
+    width: 47%;
+}
+
+p-dialog .form-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.7rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+:host::ng-deep .p-fieldset .p-fieldset-content {
+    padding: 0.25rem;
+}
+
+.reclamation-container {
+    max-height: 21rem;
+    overflow: auto;
+    margin-bottom: 1rem;
+
+    &>div {
+        padding-bottom: 0.7rem;
+    }
+}
+
+.pr-2 {
+    padding-right: 0.5rem;
+}
+
+.dialog-buttons {
+    display: flex;
+    justify-content: space-between;
+}

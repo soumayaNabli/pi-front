@@ -1,0 +1,70 @@
+<div class="card">
+    <p-table [value]="users" selectionMode="single" [(selection)]="selectedUser" dataKey="id"
+        (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onUnRowSelect($event)"
+        [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Profession</th>
+                <th>Role</th>
+                <th>Reclamation Count</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr [pSelectableRow]="user">
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.profession }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.reclamations.length }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog header="Edit {{selectedUser?.username}} Profile" [modal]="true" [(visible)]="showDetails"
+    [style]="{ width: '40rem' }">
+    <div class="form-container">
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="username" />
+            <label for="username">Username</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="email" />
+            <label for="email">Email</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="profession" />
+            <label for="profession">Profession</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText formControlName="role" />
+            <label for="role">Role</label>
+        </p-floatLabel>
+    </div>
+    <h3 class="text-bold">Reclamations</h3>
+    <div class="reclamation-container">
+        <div *ngFor="let reclamation of selectedUser?.reclamations">
+            <p-fieldset [toggleable]="true" [collapsed]="true">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2 px-2">
+                        
+                        <span class="font-bold pr-2">{{reclamation.date}}</span>
+                        <p-tag [severity]="reclamation.priorite === 'urgente' ? 'danger' : reclamation.priorite === 'moyenne' ? 'warning' : undefined" [value]="reclamation.priorite"/>
+                    </div>
+                </ng-template>
+                <p>
+                    {{reclamation.description}}
+                </p>
+                <p-tag severity="success" value="Success"/>
+            </p-fieldset>
+        </div>
+        <div *ngIf="!selectedUser?.reclamations.length">
+            <p>No Reclamations</p>
+        </div>
+    </div>
+    <div class="dialog-buttons">
+        <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
+        <p-button label="Save" (onClick)="showDetails = false" />
+    </div>
+</p-dialog>

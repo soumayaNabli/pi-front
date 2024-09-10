@@ -1,29 +1,28 @@
 {
-  "name": "soumaya-front",
-  "$schema": "node_modules/nx/schemas/project-schema.json",
-  "includedScripts": [],
+  "name": "customer-portal",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "./src",
+  "sourceRoot": "customer-portal/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/soumaya-front",
-        "index": "./src/index.html",
-        "browser": "./src/main.ts",
+        "outputPath": "dist/customer-portal",
+        "index": "customer-portal/src/index.html",
+        "browser": "customer-portal/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "tsconfig.app.json",
+        "tsConfig": "customer-portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "public"
+            "input": "customer-portal/public"
           }
         ],
-        "styles": ["./src/styles.scss"],
+        "styles": ["customer-portal/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -54,10 +53,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "soumaya-front:build:production"
+          "buildTarget": "customer-portal:build:production"
         },
         "development": {
-          "buildTarget": "soumaya-front:build:development"
+          "buildTarget": "customer-portal:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,28 +64,25 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "soumaya-front:build"
+        "buildTarget": "customer-portal:build"
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["./src"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectName}"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "jest.config.app.ts"
+        "jestConfig": "customer-portal/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "soumaya-front:build",
+        "buildTarget": "customer-portal:build",
         "port": 4200,
-        "staticFilePath": "dist/soumaya-front/browser",
+        "staticFilePath": "dist/customer-portal/browser",
         "spa": true
       }
     }

@@ -35,15 +35,8 @@ export class UserService {
     }
 
     create(user: User): Observable<any> {
-        console.log('Creating user:', user);
-    console.log('API URL:', this.baseUrl);
-    
-    return this.http.post(`${this.baseUrl}`, user).pipe(
-        catchError((error: any) => {
-            console.error('Error creating user:', error);
-            return throwError(error);
-        })
-    );
+        console.log("aaaaaaaaaaaaaaaa", user);
+        return this.http.post(`${this.baseUrl}`, user);
     }
 
     update(id: number, user: User) {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -11,6 +11,12 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
   templateUrl: './response-form.component.html',
   styleUrl: './response-form.component.css',
 })
-export class ResponseFormComponent {
-  @Input() responseData : any
+export class ResponseFormComponent implements OnInit{
+  @Input() responseData : any = {
+    description: ''
+  }
+
+  ngOnInit(): void {
+    this.responseData
+  }
 }

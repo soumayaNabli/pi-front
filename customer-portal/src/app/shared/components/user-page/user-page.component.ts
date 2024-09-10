@@ -8,6 +8,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { DialogModule } from 'primeng/dialog';
 import { FieldsetModule } from 'primeng/fieldset';
 import { TagModule } from 'primeng/tag';
+import { DropdownModule } from 'primeng/dropdown';
 import { UserService } from '../../service/user.service';
 
 
@@ -15,7 +16,7 @@ import { UserService } from '../../service/user.service';
     selector: 'app-user-page',
     standalone: true,
     providers: [UserService],
-    imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, FloatLabelModule, FieldsetModule, TagModule,FormsModule],
+    imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, FloatLabelModule, FieldsetModule, TagModule,DropdownModule,FormsModule],
     templateUrl: './user-page.component.html',
     styleUrl: './user-page.component.scss',
 })
@@ -23,6 +24,7 @@ export class UserPageComponent implements OnInit {
     @Input() users:any;
 
     selectedUser: any;
+    roles = ['admin','expert','user']
     showDetails = false;
     showAddUser = false;
     formGroup: FormGroup | undefined;
@@ -45,8 +47,6 @@ export class UserPageComponent implements OnInit {
             profession: event.data.profession,
             role: event.data.role
         })
-        console.log("🚀 ~ UserPageComponent ~ onRowSelect ~ this.formGroup:", this.formGroup)
-        console.log("🚀 ~ UserPageComponent ~ onRowSelect ~ event.data:", event.data)
         this.showDetails = true;
     }
     onUnRowSelect(event: any) {
@@ -54,13 +54,7 @@ export class UserPageComponent implements OnInit {
     }
 
     onSubmitAdd(form: any) {
-        console.log('Form Data: ', form.value);
-        this.userService.create(form.value).subscribe(
-            response => {
-                console.log('User created successfully:', response);
-            },
-            error => {
-                console.error('Error creating user:', error);
-            })
+        console.log('Form Datgredjna: ', form.value);
+        this.userService.create(form.value)
       }
 }

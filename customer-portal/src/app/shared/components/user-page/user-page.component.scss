@@ -42,3 +42,8 @@ p-dialog .form-container {
     align-items: center;
     margin-bottom: 0.5rem;
 }
+
+:host::ng-deep .p-dropdown.p-component,:host::ng-deep .p-inputtext.p-component  {
+    width: 100%;
+}
+

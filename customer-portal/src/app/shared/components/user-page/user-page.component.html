@@ -75,7 +75,7 @@
 
 <p-dialog header="Add new User" [modal]="true" [(visible)]="showAddUser" [style]="{ width: '40rem' }">
     <form #userForm="ngForm" (ngSubmit)="onSubmitAdd(userForm)">
-    <div class="form-container">
+        <div class="form-container">
             <p-floatLabel>
                 <input type="text" pInputText name="username" ngModel />
                 <label for="username">Username</label>
@@ -89,17 +89,17 @@
                 <label for="password">Password</label>
             </p-floatLabel>
             <p-floatLabel>
-                <input type="text" pInputText name="profession" ngModel />
-                <label for="profession">Profession</label>
+                <p-dropdown name="role" [options]="roles" ngModel />
+                <label for="role">Role</label>
             </p-floatLabel>
             <p-floatLabel>
-                <input type="text" pInputText name="role" ngModel />
-                <label for="role">Role</label>
+                <input type="text" pInputText name="profession" ngModel />
+                <label for="profession">Profession</label>
             </p-floatLabel>
 
         </div>
         <div class="dialog-buttons">
-            <p-button label="Cancel" severity="secondary" (onClick)="showDetails = false" />
+            <p-button label="Cancel" severity="secondary" (onClick)="showAddUser = false" />
             <p-button label="Save" type="submit" />
         </div>
     </form>

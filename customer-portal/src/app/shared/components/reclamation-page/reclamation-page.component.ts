@@ -59,9 +59,9 @@ export class ReclamationPageComponent implements OnInit {
     description: ''
   };
   priorities = [
-    'Basse',
-    'Moyenne',
-    'Urgente'
+    'basse',
+    'moyenne',
+    'urgente'
   ]
   showAddReclamation=false;
 

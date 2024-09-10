@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface Rdv {
     id: number;
@@ -15,13 +16,15 @@ export interface Rdv {
 })
 export class RdvService {
     baseUrl = `${URL_PATH}/rdvs`; 
-    rdvs = signal<Rdv[]>([]);
+    private rdvs = new BehaviorSubject<Rdv[]>([]);
+
+    rdvs$ = this.rdvs.asObservable();
 
     constructor(private http: HttpClient) { }
 
     getAll() {
         this.http.get<Rdv[]>(this.baseUrl).subscribe(data => {
-            this.rdvs.set(data);
+            this.rdvs.next(data);
         });
     }
 

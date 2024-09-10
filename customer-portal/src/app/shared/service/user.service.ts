@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
 import { Reclamation } from './reclamation.service';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface User {
     id: number;
@@ -35,8 +35,6 @@ export class UserService {
     }
 
     create(user: User): Observable<any> {
-        console.log("aaaaaaaaaaaaaaaa", user);
-        //return this.http.post(`${this.baseUrl}`, user);
         return this.http.post(this.baseUrl, user);
                 
     }

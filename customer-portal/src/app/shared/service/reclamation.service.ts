@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
+import { BehaviorSubject } from 'rxjs';
 
 
 export interface Reponse {
@@ -25,13 +26,14 @@ export interface Reclamation {
 })
 export class ReclamationService {
     baseUrl = `${URL_PATH}/reclamations`;
-    reclamations = signal<Reclamation[]>([]);
+    private reclamationSubject = new BehaviorSubject<Reclamation[]>([]);
+    reclamations$ = this.reclamationSubject.asObservable();
 
     constructor(private http: HttpClient) { }
 
     getAll() {
         this.http.get<Reclamation[]>(this.baseUrl).subscribe(data => {
-            this.reclamations.set(data);
+            this.reclamationSubject.next(data);
         });
     }
 

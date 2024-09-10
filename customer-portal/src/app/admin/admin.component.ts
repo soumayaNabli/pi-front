@@ -8,6 +8,7 @@ import { HeaderComponent } from '../shared/components/header/header.component';
 import { UserPageComponent } from '../shared/components/user-page/user-page.component';
 import { ReclamationPageComponent } from '../shared/components/reclamation-page/reclamation-page.component';
 import { UserService } from '../shared/service/user.service';
+import { ReclamationService } from '../shared/service/reclamation.service';
 
 @Component({
   selector: 'app-admin',
@@ -30,7 +31,7 @@ export class AdminComponent implements OnInit {
     return this._activeTabIndex;
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private reclamationService: ReclamationService) { }
 
   ngOnInit(): void {
     this.route.url.subscribe(url => {
@@ -38,6 +39,7 @@ export class AdminComponent implements OnInit {
         const path = url[1].path;
         if (path === 'reclamation') {
           this.activeTabIndex = 1; // Set to the index of the Reclamations tab
+          this.initDataForReclamationPage()
         } else {
           this.activeTabIndex = 0; // Default to the first tab
           this.initDataForUserPage()
@@ -49,6 +51,13 @@ export class AdminComponent implements OnInit {
   initDataForUserPage() {
     this.userService.getAll();
     this.userService.users$.subscribe(data => {
+      this.userData = data;
+    });
+  }
+
+  initDataForReclamationPage() {
+    this.reclamationService.getAll();
+    this.reclamationService.reclamations$.subscribe(data => {
       this.userData = data;
     });
   }

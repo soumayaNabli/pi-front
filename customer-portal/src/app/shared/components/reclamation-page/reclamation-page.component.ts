@@ -10,6 +10,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { TagModule } from 'primeng/tag';
 import { BadgeModule } from 'primeng/badge';
 import { FileUploaderComponent } from '../file-uploader/file-uploader.component';
+import { ResponseFormComponent } from '../response-form/response-form.component';
 
 
 const REACLAMATION_DATA = [
@@ -21,12 +22,12 @@ const REACLAMATION_DATA = [
     "date": "2023-12-17",
     "priorite": "basse",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 3,
       "description": "c'est resolu",
       "date": "2024-08-27",
       "rating": 0
-    }]
+    }
   },
   {
     "id": 4,
@@ -35,12 +36,12 @@ const REACLAMATION_DATA = [
     "date": "2024-08-27",
     "priorite": "moyenne",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 2,
       "description": "on va traiter ceci ",
       "date": "2024-08-27",
       "rating": 0
-    }]
+    }
   },
   {
     "id": 5,
@@ -49,12 +50,12 @@ const REACLAMATION_DATA = [
     "date": "2024-08-27",
     "priorite": "basse",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 6,
       "description": "c'est resolu",
       "date": "2024-08-27",
       "rating": 0
-    }]
+    }
   },
   {
     "id": 6,
@@ -63,12 +64,12 @@ const REACLAMATION_DATA = [
     "date": "2024-08-27",
     "priorite": "urgente",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 10,
       "description": "c bon",
       "date": "2024-09-06",
       "rating": 3
-    }]
+    }
   },
   {
     "id": 10,
@@ -77,12 +78,12 @@ const REACLAMATION_DATA = [
     "date": "2024-09-07",
     "priorite": "urgente",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 13,
       "description": "bara ",
       "date": "2024-09-07",
       "rating": 3
-    }]
+    }
   },
   {
     "id": 11,
@@ -91,12 +92,12 @@ const REACLAMATION_DATA = [
     "date": "2024-09-07",
     "priorite": "urgente",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 15,
       "description": "bara ",
       "date": "2024-09-07",
       "rating": 3
-    }]
+    }
   },
   {
     "id": 13,
@@ -114,12 +115,12 @@ const REACLAMATION_DATA = [
     "date": "2024-09-07",
     "priorite": "moyenne",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 16,
       "description": "okay ",
       "date": "2024-09-07",
       "rating": 1
-    }]
+    }
   },
   {
     "id": 15,
@@ -128,19 +129,31 @@ const REACLAMATION_DATA = [
     "date": "2024-09-08",
     "priorite": "basse",
     "fichier": [],
-    "reponse": [{
+    "reponse": {
       "id": 17,
       "description": "okay ",
       "date": "2024-09-08",
       "rating": 2
-    }]
+    }
   }
 ]
 
 @Component({
   selector: 'app-reclamation-page',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule, DialogModule, InputTextModule, FloatLabelModule, FieldsetModule, TagModule, BadgeModule, FileUploaderComponent],
+  imports: [
+    CommonModule, 
+    TableModule, 
+    ButtonModule, 
+    DialogModule, 
+    InputTextModule, 
+    FloatLabelModule, 
+    FieldsetModule, 
+    TagModule, 
+    BadgeModule, 
+    FileUploaderComponent,
+    ResponseFormComponent
+  ],
   templateUrl: './reclamation-page.component.html',
   styleUrl: './reclamation-page.component.scss',
 })
@@ -150,6 +163,8 @@ export class ReclamationPageComponent implements OnInit {
   selectedReclamation: any;
   formGroup: FormGroup | undefined;
   uploadVisible = false;
+  responseVisible = false;
+  responseData:any
 
   ngOnInit() {
     this.formGroup = new FormGroup({
@@ -162,5 +177,9 @@ export class ReclamationPageComponent implements OnInit {
   }
   onUnRowSelect(event: any) {
     console.log(event);
+  }
+  showResponse(response:any) {
+    this.responseVisible = true
+    this.responseData = response
   }
 }

@@ -1,0 +1,12 @@
+.parent {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.div2 {
+    align-self: end;
+    font-size: 13px;
+    color: dimgray;
+    text-decoration: underline;
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
 import { Reclamation } from './reclamation.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface User {
     id: number;
@@ -34,9 +34,8 @@ export class UserService {
         return this.http.get<User>(`${this.baseUrl}/${id}`);
     }
 
-    create(user: User) {
-        console.log('this create user',user)
-        return this.http.post(`${this.baseUrl}/signup`, user);
+    create(user: User): Observable<any> {
+        return this.http.post(`${this.baseUrl}`, user);
     }
 
     update(id: number, user: User) {

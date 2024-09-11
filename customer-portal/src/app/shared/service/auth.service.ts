@@ -5,6 +5,20 @@ import { URL_PATH } from '../CONSTS';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user.service';
 
+interface Authority {
+  authority: string;
+}
+
+interface UserDetail {
+  accountNonExpired: boolean;
+  accountNonLocked: boolean;
+  authorities: Authority[];
+  credentialsNonExpired: boolean;
+  enabled: boolean;
+  password: string;
+  username: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,15 +35,15 @@ export class AuthService {
   login(username: string, password: string): void {
     console.log("🚀 ~ AuthService ~ login ~ mdp:", password)
     console.log("🚀 ~ AuthService ~ login ~ username:", username)
-    this.http.post(`${this.baseUrl}/login`, { username, password }).subscribe(res => {
+    this.http.post(`${this.baseUrl}/login`, { username, password }).subscribe((res) => {
       console.log(res);
+      const data = res as UserDetail
+      this.userRole = data.authorities[0].authority 
       this.userName = username;
       this.isAuthenticated = true;
-      this.userRole = "admin";
+      this.router.navigate(['/' + this.userRole]);
     }
-    )
-
-    this.router.navigate(['/' + this.userRole]);
+  )
   }
 
   getUser(): any {

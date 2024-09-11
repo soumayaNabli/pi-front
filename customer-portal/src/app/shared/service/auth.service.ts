@@ -18,9 +18,10 @@ export class AuthService {
 
   constructor(private router: Router,private http: HttpClient) {}
 
-  login(username:string,mdp:string): void {
-    console.log("🚀 ~ AuthService ~ login ~ mdp:", mdp)
+  login(username:string,password:string): void {
+    console.log("🚀 ~ AuthService ~ login ~ mdp:", password)
     console.log("🚀 ~ AuthService ~ login ~ username:", username)
+    this.http.post(`${this.baseUrl}/login`,{username,password}).subscribe(res => console.log(res))
     this.userName = username;
     this.isAuthenticated = true;
     this.userRole = "admin";

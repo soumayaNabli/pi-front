@@ -28,6 +28,10 @@ form {display: flex;
     display: flex;
     justify-content: space-between;
 }
-:host::ng-deep .p-dropdown.p-component,:host::ng-deep .p-inputtext.p-component  {
+:host::ng-deep .p-dropdown.p-component,:host::ng-deep .p-inputtext.p-component,:host::ng-deep p-inputnumber,:host::ng-deep p-inputnumber span,:host::ng-deep p-calendar span {
     width: 100%;
+}
+
+:host::ng-deep p-calendar {
+    display: block;
 }

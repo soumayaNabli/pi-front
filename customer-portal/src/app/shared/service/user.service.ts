@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_PATH } from '../CONSTS';
-import { Reclamation } from './reclamation.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Reclamation } from './reclamation.service';
 
 export interface User {
     id: number;

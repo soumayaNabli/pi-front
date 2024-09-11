@@ -4,12 +4,16 @@ import { AuthService } from '../shared/service/auth.service';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RippleModule } from 'primeng/ripple';
 import { FormsModule } from '@angular/forms';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ButtonModule, InputTextModule, FormsModule],
+  providers: [HttpClient,AuthService],
+  imports: [CommonModule, ButtonModule, InputTextModule, FormsModule,CheckboxModule,RippleModule,HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -19,15 +23,9 @@ export class LoginComponent {
   password: string | null = null;
   constructor(private authService: AuthService,private router: Router) {}
 
-  loginAsAdmin() {
-      this.authService.login('admin',this.username as string);
+
+  login(form:any) {
+    this.authService.login(form.value.username,form.value.mdp)
   }
 
-  loginAsUser() {
-    this.authService.login('user',this.username as string);
-  }
-
-  loginAsExpert() {
-    this.authService.login('expert',this.username as string);
-  }
 }

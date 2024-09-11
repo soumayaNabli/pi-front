@@ -1,12 +1,12 @@
 <app-header></app-header>
 <p-tabView [(activeIndex)]="activeTabIndex">
     <p-tabPanel header="Agenda">
-        <app-agenda></app-agenda>
+        <app-agenda [userRole]="'user'"></app-agenda>
     </p-tabPanel>
     <p-tabPanel header="Reclamations">
-        <app-reclamation-page [reclamationData]="reclamationData"></app-reclamation-page>
+        <app-reclamation-page [userRole]="'user'" [reclamationData]="reclamationData"></app-reclamation-page>
     </p-tabPanel>
     <p-tabPanel header="Rendez-vous">
-        <app-rdv-page></app-rdv-page>
+        <app-rdv-page [userRole]="'user'"></app-rdv-page>
     </p-tabPanel>
 </p-tabView>

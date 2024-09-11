@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -64,7 +64,7 @@ const RDV_DATA = [
   styleUrl: './rdv-page.component.css',
 })
 export class RdvPageComponent {
-
+@Input() userRole=""
   rdvData = RDV_DATA
   selectedRdv: any
 

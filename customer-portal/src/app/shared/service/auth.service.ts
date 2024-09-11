@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { URL_PATH } from '../CONSTS';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  baseUrl = `${URL_PATH}/user`;
+    private userSubject = new BehaviorSubject<User[]>([]);
+    user$ = this.userSubject.asObservable();
   private isAuthenticated = false;
   private userRole: string | null = null;
   private userName: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private http: HttpClient) {}
 
-  login(role: string, name: string): void {
-    this.userName = name;
+  login(username:string,mdp:string): void {
+    console.log("🚀 ~ AuthService ~ login ~ mdp:", mdp)
+    console.log("🚀 ~ AuthService ~ login ~ username:", username)
+    this.userName = username;
     this.isAuthenticated = true;
-    this.userRole = role;
-    this.router.navigate(['/'+role]);
+    this.userRole = "admin";
+    this.router.navigate(['/'+this.userRole]);
   }
 
   getUser(): any {

@@ -50,7 +50,7 @@ interface UploadEvent {
 export class ReclamationPageComponent implements OnInit {
 
   @Input() reclamationData: any
-
+@Input() userRole=""
   selectedReclamation: any;
   formGroup: FormGroup | undefined;
   uploadVisible = false;

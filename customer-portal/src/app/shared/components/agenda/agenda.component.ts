@@ -1,5 +1,5 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular'; // Import FullCalendar module
 import { DialogModule } from 'primeng/dialog';
@@ -27,6 +27,7 @@ import { UserService, User } from '../../service/user.service';
 })
 export class AgendaComponent {
   @ViewChild('calendar', {static: false}) calendarComponent: any;
+  @Input() userRole=""
   addVisible = false
   calendarOptions:any
   date = new Date()

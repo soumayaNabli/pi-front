@@ -22,7 +22,7 @@ import { UserService } from '../../service/user.service';
 })
 export class UserPageComponent implements OnInit {
     @Input() users:any;
-
+@Input() userRole=""
     selectedUser: any;
     roles = ['admin','expert','user']
     showDetails = false;

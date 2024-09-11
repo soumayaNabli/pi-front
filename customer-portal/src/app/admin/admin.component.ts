@@ -9,12 +9,13 @@ import { UserPageComponent } from '../shared/components/user-page/user-page.comp
 import { ReclamationPageComponent } from '../shared/components/reclamation-page/reclamation-page.component';
 import { UserService } from '../shared/service/user.service';
 import { ReclamationService } from '../shared/service/reclamation.service';
+import { DashboardComponent } from '../shared/components/dashboard/dashboard.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
   providers: [HttpClient, UserService, ReclamationService],
-  imports: [CommonModule, HeaderComponent, TabViewModule, UserPageComponent, ReclamationPageComponent],
+  imports: [CommonModule, HeaderComponent, TabViewModule, UserPageComponent, ReclamationPageComponent,DashboardComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
@@ -38,15 +39,14 @@ export class AdminComponent implements OnInit {
       if (url.length !== 1) {
         const path = url[1].path;
         if (path === 'reclamation') {
-          this.activeTabIndex = 1; // Set to the index of the Reclamations tab
+          this.activeTabIndex = 2; // Set to the index of the Reclamations tab
           this.initDataForReclamationPage()
-        } else {
-          this.activeTabIndex = 0; // Default to the first tab
+        } else if (path === 'expert') {
+          this.activeTabIndex = 1; // Default to the first tab
           this.initDataForUserPage()
         }
-      } else {
-        this.initDataForUserPage()
-      }
+
+      } 
     });
   }
 

@@ -1,0 +1,19 @@
+.card {
+  width: 45vw;
+  height: 30vh;
+}
+.card2 {
+    width: 90vw;
+    height: 30vh;
+  }
+  .kpis{
+    width: 90vw;
+    height: 15vh;
+  }
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}

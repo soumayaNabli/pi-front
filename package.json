@@ -23,6 +23,7 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
     "@nrwl/angular": "^19.6.5",
+    "chart.js": "^4.4.4",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.9",
     "rxjs": "~7.8.0",

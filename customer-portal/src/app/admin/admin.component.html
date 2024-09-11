@@ -1,5 +1,8 @@
 <app-header></app-header>
 <p-tabView [(activeIndex)]="activeTabIndex">
+    <p-tabPanel header="Dashboard">
+        <app-dashboard></app-dashboard>
+    </p-tabPanel>
     <p-tabPanel header="Experts">
         <app-user-page userRole="admin" [users]="userData"></app-user-page>
     </p-tabPanel>
